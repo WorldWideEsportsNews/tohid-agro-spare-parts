@@ -2,269 +2,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Customer Login | TOHEEED AGRO SPARE PARTS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Login | TOHEEED AGRO SPARE PARTS</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #102b20, #17633e);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .login-box {
-      background: white;
-      width: 100%;
-      max-width: 430px;
-      padding: 35px;
-      border-radius: 15px;
-      box-shadow: 0 15px 40px rgba(0,0,0,.25);
-    }
-
-    h1 {
-      color: #17633e;
-      text-align: center;
-      font-size: 25px;
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      text-align: center;
-      color: #666;
-      margin-bottom: 25px;
-      font-size: 14px;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 22px;
-    }
-
-    .tabs button {
-      width: 50%;
-      padding: 12px;
-      border: 1px solid #17633e;
-      background: white;
-      color: #17633e;
-      border-radius: 7px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .tabs button.active {
-      background: #17633e;
-      color: white;
-    }
-
-    label {
-      display: block;
-      margin: 14px 0 7px;
-      font-weight: bold;
-      color: #333;
-      font-size: 14px;
-    }
-
-    input {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #ccc;
-      border-radius: 7px;
-      font-size: 15px;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 14px;
-      margin-top: 22px;
-      background: #17633e;
-      color: white;
-      border: none;
-      border-radius: 7px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .submit-btn:hover { background: #104b2e; }
-
-    #message {
-      margin-top: 16px;
-      text-align: center;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .back-link {
-      display: block;
-      text-align: center;
-      margin-top: 22px;
-      color: #17633e;
-      text-decoration: none;
-    }
-
-    #dashboard { display: none; text-align: center; }
-    #dashboard p { margin: 18px 0; color: #555; }
-  </style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#102b20,#17633e);
+min-height:100vh;display:flex;align-items:center;
+justify-content:center;padding:20px
+}
+.login-box{
+background:white;width:100%;max-width:430px;
+padding:35px;border-radius:15px;
+box-shadow:0 15px 40px rgba(0,0,0,.25)
+}
+h1{color:#17633e;text-align:center;font-size:25px;margin-bottom:8px}
+.subtitle{text-align:center;color:#666;margin-bottom:25px;font-size:14px}
+.tabs{display:flex;gap:10px;margin-bottom:22px}
+.tabs button{
+width:50%;padding:12px;border:1px solid #17633e;
+background:white;color:#17633e;border-radius:7px;
+cursor:pointer;font-weight:bold
+}
+.tabs button.active{background:#17633e;color:white}
+label{display:block;margin:14px 0 7px;font-weight:bold;color:#333;font-size:14px}
+input{
+width:100%;padding:13px;border:1px solid #ccc;
+border-radius:7px;font-size:15px
+}
+.submit-btn,.google-btn{
+width:100%;padding:14px;margin-top:18px;
+border-radius:7px;font-size:15px;font-weight:bold;cursor:pointer
+}
+.submit-btn{background:#17633e;color:white;border:none}
+.submit-btn:hover{background:#104b2e}
+.google-btn{
+background:white;color:#333;border:1px solid #ccc;
+display:flex;align-items:center;justify-content:center;gap:12px
+}
+.google-btn:hover{background:#f5f5f5}
+.google-btn img{width:20px;height:20px}
+.divider{
+display:flex;align-items:center;gap:12px;
+margin:20px 0;color:#888;font-size:13px
+}
+.divider:before,.divider:after{
+content:"";flex:1;height:1px;background:#ddd
+}
+#message{margin-top:16px;text-align:center;font-size:14px;line-height:1.5}
+.back-link{display:block;text-align:center;margin-top:22px;color:#17633e;text-decoration:none}
+#dashboard{display:none;text-align:center}
+#dashboard p{margin:18px 0;color:#555}
+button:disabled{opacity:.6;cursor:wait}
+</style>
 </head>
 
 <body>
+<div class="login-box">
 
-  <div class="login-box">
-    <h1>TOHEEED AGRO</h1>
-    <p class="subtitle">Customer Account Portal</p>
+<h1>TOHEEED AGRO</h1>
+<p class="subtitle">Customer Account Portal</p>
 
-    <div id="authArea">
-      <div class="tabs">
-        <button id="loginTab" class="active" type="button">Login</button>
-        <button id="signupTab" type="button">Create Account</button>
-      </div>
+<div id="authArea">
 
-      <form id="authForm">
-        <div id="nameField" style="display:none;">
-          <label for="fullName">Full Name</label>
-          <input id="fullName" type="text" placeholder="Enter your full name">
-        </div>
+<div class="tabs">
+<button id="loginTab" class="active" type="button">Login</button>
+<button id="signupTab" type="button">Create Account</button>
+</div>
 
-        <label for="email">Email Address</label>
-        <input id="email" type="email" required placeholder="Enter your email">
+<form id="authForm">
 
-        <label for="password">Password</label>
-        <input id="password" type="password" required minlength="6" placeholder="Minimum 6 characters">
+<div id="nameField" style="display:none">
+<label for="fullName">Full Name</label>
+<input id="fullName" type="text" placeholder="Enter your full name">
+</div>
 
-        <button class="submit-btn" id="submitBtn" type="submit">Login</button>
-      </form>
+<label for="email">Email Address</label>
+<input id="email" type="email" required placeholder="Enter your email">
 
-      <p id="message" role="status"></p>
-    </div>
+<label for="password">Password</label>
+<input id="password" type="password" required minlength="6" placeholder="Minimum 6 characters">
 
-    <div id="dashboard">
-      <h2>Welcome!</h2>
-      <p id="customerEmail"></p>
-      <p>Your customer account is active.</p>
-      <button class="submit-btn" id="logoutBtn" type="button">Logout</button>
-    </div>
+<button class="submit-btn" id="submitBtn" type="submit">Login</button>
+</form>
 
-    <a class="back-link" href="index.html">← Back to Home</a>
-  </div>
+<div class="divider">OR</div>
 
-  <script>
-    const SUPABASE_URL = "https://slglavmmiqojtvguxijc.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_YI7H95rmI26H02gzazmvHQ_gCW3SIcj";
+<button class="google-btn" id="googleBtn" type="button">
+<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+Continue with Google
+</button>
 
-    const supabaseClient = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+<p id="message" role="status"></p>
+</div>
 
-    let signupMode = false;
+<div id="dashboard">
+<h2>Welcome!</h2>
+<p id="customerEmail"></p>
+<p>Your customer account is active.</p>
+<button class="submit-btn" id="logoutBtn" type="button">Logout</button>
+</div>
 
-    const authForm = document.getElementById("authForm");
-    const message = document.getElementById("message");
-    const nameField = document.getElementById("nameField");
-    const submitBtn = document.getElementById("submitBtn");
-    const authArea = document.getElementById("authArea");
-    const dashboard = document.getElementById("dashboard");
+<a class="back-link" href="index.html">← Back to Home</a>
 
-    function showMessage(text) {
-      message.textContent = text;
-    }
+</div>
 
-    function setMode(isSignup) {
-      signupMode = isSignup;
+<script>
+const SUPABASE_URL="https://slglavmmiqojtvguxijc.supabase.co";
+const SUPABASE_KEY="sb_publishable_YI7H95rmI26H02gzazmvHQ_gCW3SIcj";
 
-      document.getElementById("loginTab").classList.toggle("active", !isSignup);
-      document.getElementById("signupTab").classList.toggle("active", isSignup);
+const supabaseClient=window.supabase.createClient(
+SUPABASE_URL,SUPABASE_KEY
+);
 
-      nameField.style.display = isSignup ? "block" : "none";
-      document.getElementById("fullName").required = isSignup;
-      submitBtn.textContent = isSignup ? "Create Account" : "Login";
+let signupMode=false;
 
-      showMessage("");
-    }
+const authForm=document.getElementById("authForm");
+const message=document.getElementById("message");
+const nameField=document.getElementById("nameField");
+const submitBtn=document.getElementById("submitBtn");
+const authArea=document.getElementById("authArea");
+const dashboard=document.getElementById("dashboard");
 
-    document.getElementById("loginTab").addEventListener("click", () => setMode(false));
-    document.getElementById("signupTab").addEventListener("click", () => setMode(true));
+function showMessage(text){
+message.textContent=text;
+}
 
-    authForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
+function setMode(isSignup){
+signupMode=isSignup;
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+document.getElementById("loginTab").classList.toggle("active",!isSignup);
+document.getElementById("signupTab").classList.toggle("active",isSignup);
 
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Please wait...";
-      showMessage("");
+nameField.style.display=isSignup?"block":"none";
+document.getElementById("fullName").required=isSignup;
+submitBtn.textContent=isSignup?"Create Account":"Login";
 
-      try {
-        if (signupMode) {
-          const fullName = document.getElementById("fullName").value.trim();
+showMessage("");
+}
 
-          const { data, error } = await supabaseClient.auth.signUp({
-            email,
-            password,
-            options: {
-              data: { full_name: fullName },
-              emailRedirectTo: window.location.origin + window.location.pathname
-            }
-          });
+document.getElementById("loginTab").addEventListener("click",()=>setMode(false));
+document.getElementById("signupTab").addEventListener("click",()=>setMode(true));
 
-          if (error) throw error;
+authForm.addEventListener("submit",async(event)=>{
+event.preventDefault();
 
-          if (data.session) {
-            showMessage("Account created successfully!");
-          } else {
-            showMessage("Account created. Please check your email to confirm your account.");
-          }
-        } else {
-          const { error } = await supabaseClient.auth.signInWithPassword({
-            email,
-            password
-          });
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
 
-          if (error) throw error;
-        }
-      } catch (error) {
-        showMessage(error.message);
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = signupMode ? "Create Account" : "Login";
-      }
-    });
+submitBtn.disabled=true;
+submitBtn.textContent="Please wait...";
+showMessage("");
 
-    function updateAccount(session) {
-      if (session) {
-        authArea.style.display = "none";
-        dashboard.style.display = "block";
-        document.getElementById("customerEmail").textContent = session.user.email;
-      } else {
-        authArea.style.display = "block";
-        dashboard.style.display = "none";
-      }
-    }
+try{
+if(signupMode){
+const fullName=document.getElementById("fullName").value.trim();
 
-    supabaseClient.auth.onAuthStateChange((_event, session) => {
-      updateAccount(session);
-    });
+const {data,error}=await supabaseClient.auth.signUp({
+email:email,
+password:password,
+options:{
+data:{full_name:fullName},
+emailRedirectTo:window.location.origin+window.location.pathname
+}
+});
 
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
-      const { error } = await supabaseClient.auth.signOut();
-      if (error) showMessage(error.message);
-    });
+if(error)throw error;
 
-    supabaseClient.auth.getSession().then(({ data }) => {
-      updateAccount(data.session);
-    });
-  </script>
+if(data.session){
+showMessage("Account created successfully!");
+}else{
+showMessage("Account created. Please check your email to confirm your account.");
+}
+
+}else{
+const {error}=await supabaseClient.auth.signInWithPassword({
+email:email,
+password:password
+});
+if(error)throw error;
+}
+}catch(error){
+showMessage(error.message);
+}finally{
+submitBtn.disabled=false;
+submitBtn.textContent=signupMode?"Create Account":"Login";
+}
+});
+
+document.getElementById("googleBtn").addEventListener("click",async()=>{
+const googleBtn=document.getElementById("googleBtn");
+googleBtn.disabled=true;
+showMessage("Connecting to Google...");
+
+try{
+const {error}=await supabaseClient.auth.signInWithOAuth({
+provider:"google",
+options:{
+redirectTo:window.location.origin+window.location.pathname
+}
+});
+if(error)throw error;
+}catch(error){
+showMessage(error.message);
+googleBtn.disabled=false;
+}
+});
+
+function updateAccount(session){
+if(session){
+authArea.style.display="none";
+dashboard.style.display="block";
+document.getElementById("customerEmail").textContent=session.user.email;
+}else{
+authArea.style.display="block";
+dashboard.style.display="none";
+}
+}
+
+supabaseClient.auth.onAuthStateChange((_event,session)=>{
+updateAccount(session);
+});
+
+supabaseClient.auth.getSession().then(({data})=>{
+updateAccount(data.session);
+});
+
+document.getElementById("logoutBtn").addEventListener("click",async()=>{
+const {error}=await supabaseClient.auth.signOut();
+if(error)showMessage(error.message);
+});
+</script>
 
 </body>
 </html>
