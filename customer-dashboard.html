@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Dashboard | TOHEEED AGRO</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6f4;
+      color: #222;
+    }
+
+    header {
+      background: #123c2b;
+      color: white;
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    header h2 { margin: 0; }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .welcome {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 3px 15px #00000010;
+    }
+
+    .welcome h1 { color: #123c2b; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 15px #00000010;
+    }
+
+    .card h3 { color: #17613f; }
+
+    .button {
+      display: inline-block;
+      background: #17613f;
+      color: white;
+      border: 0;
+      padding: 12px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .logout { background: #b52d2d; }
+
+    #message { text-align: center; padding: 40px; }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h2>TOHEEED AGRO SPARE PARTS</h2>
+  <button class="button logout" id="logoutBtn">Logout</button>
+</header>
+
+<main class="container" id="dashboard" hidden>
+
+  <section class="welcome">
+    <h1>Welcome, <span id="customerName">Customer</span>!</h1>
+    <p>You are now logged in to your customer account.</p>
+    <p><strong>Email:</strong> <span id="customerEmail"></span></p>
+  </section>
+
+  <section class="cards">
+
+    <div class="card">
+      <h3>My Account</h3>
+      <p>View your customer account details.</p>
+      <p id="accountStatus">Account active</p>
+    </div>
+
+    <div class="card">
+      <h3>My Orders</h3>
+      <p>Your order history will appear here once we connect the order system.</p>
+    </div>
+
+    <div class="card">
+      <h3>Spare Parts</h3>
+      <p>Explore our machinery and agricultural spare parts.</p>
+      <a class="button" href="index.html#parts">Explore Parts</a>
+    </div>
+
+    <div class="card">
+      <h3>Contact Us</h3>
+      <p>Need help with an order or spare part?</p>
+      <a class="button" href="https://wa.me/923334246467" target="_blank" rel="noopener">WhatsApp Us</a>
+    </div>
+
+  </section>
+
+</main>
+
+<div id="message">Checking your login...</div>
+
+<script>
+  const SUPABASE_URL = "https://slglavmmiqojtvguxijc.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_YI7H95rmI26H02gzazmvHQ_gCW3SIcj";
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  async function loadDashboard() {
+    const { data, error } = await supabaseClient.auth.getSession();
+
+    if (error || !data.session) {
+      window.location.replace("login.html");
+      return;
+    }
+
+    const user = data.session.user;
+    const name =
+      user.user_metadata?.full_name ||
+      user.user_metadata?.name ||
+      user.email?.split("@")[0] ||
+      "Customer";
+
+    document.getElementById("customerName").textContent = name;
+    document.getElementById("customerEmail").textContent = user.email || "";
+
+    document.getElementById("message").hidden = true;
+    document.getElementById("dashboard").hidden = false;
+  }
+
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) {
+      alert("Logout failed. Please try again.");
+      return;
+    }
+
+    window.location.replace("login.html");
+  });
+
+  supabaseClient.auth.onAuthStateChange((event, session) => {
+    if (event === "SIGNED_OUT" || !session) {
+      window.location.replace("login.html");
+    }
+  });
+
+  loadDashboard();
+</script>
+
+</body>
+</html>
