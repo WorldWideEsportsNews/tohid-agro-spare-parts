@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | TOHEEED AGRO</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f3f6f4;color:#222}
+header{background:#123d25;color:white;padding:22px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+header h2{font-size:23px}
+header button{background:#dc3545;color:white;border:0;padding:11px 18px;border-radius:6px;cursor:pointer}
+.container{max-width:1100px;margin:35px auto;padding:20px}
+.welcome{background:#123d25;color:white;padding:30px;border-radius:12px;margin-bottom:25px}
+.welcome h1{margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:white;padding:25px;border-radius:10px;box-shadow:0 3px 12px #00000012}
+.card h3{color:#123d25;margin-bottom:12px}
+.card p{color:#666;line-height:1.6}
+.card a{display:inline-block;margin-top:15px;background:#198754;color:white;text-decoration:none;padding:11px 17px;border-radius:6px}
+.status{margin-top:25px;background:#e7eee8;padding:20px;border-radius:10px}
+#message{padding:30px;text-align:center;font-size:17px}
+footer{text-align:center;background:#123d25;color:white;padding:20px;margin-top:40px}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>TOHEEED AGRO — ADMIN</h2>
+<button id="logoutButton" style="display:none">Logout</button>
+</header>
+
+<div class="container">
+<div id="message">Checking administrator access...</div>
+
+<div id="adminContent" style="display:none">
+
+<section class="welcome">
+<h1>Welcome, Administrator!</h1>
+<p>TOHEEED AGRO Spare Parts Management Panel</p>
+<p id="adminEmail" style="margin-top:10px"></p>
+</section>
+
+<div class="grid">
+
+<div class="card">
+<h3>Product Catalogue</h3>
+<p>View your agricultural spare parts catalogue.</p>
+<a href="spare-parts.html">Open Catalogue</a>
+</div>
+
+<div class="card">
+<h3>Manage Products</h3>
+<p>Next, we will connect product creation, prices and stock to Supabase.</p>
+</div>
+
+<div class="card">
+<h3>Customer Orders</h3>
+<p>Next, we will build the customer order management system.</p>
+</div>
+
+<div class="card">
+<h3>Website</h3>
+<p>Visit the public TOHEEED AGRO website.</p>
+<a href="index.html">Open Website</a>
+</div>
+
+</div>
+
+<div class="status">
+<h3>Admin Account Status</h3>
+<p style="margin-top:10px">Your Google account has passed the administrator email check.</p>
+<p style="margin-top:8px">Product database connection: Next setup step.</p>
+</div>
+
+</div>
+</div>
+
+<footer>
+<p>© 2026 TOHEEED AGRO SPARE PARTS</p>
+</footer>
+
+<script>
+const SUPABASE_URL = "https://slglavmmiqojtvguxijc.supabase.co";
+const SUPABASE_KEY = "sb_publishable_YI7H95rmI26H02gzazmvHQ_gCW3SIcj";
+
+const ADMIN_EMAIL = "huzaifahafeez743@gmail.com";
+
+const client = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+const message = document.getElementById("message");
+const adminContent = document.getElementById("adminContent");
+const logoutButton = document.getElementById("logoutButton");
+
+async function checkAdmin() {
+  const { data, error } = await client.auth.getUser();
+
+  if (error || !data.user) {
+    window.location.replace("login.html");
+    return;
+  }
+
+  const email = (data.user.email || "").toLowerCase();
+
+  if (email !== ADMIN_EMAIL.toLowerCase()) {
+    message.textContent = "Access denied. This account is not authorised.";
+    return;
+  }
+
+  message.style.display = "none";
+  adminContent.style.display = "block";
+  logoutButton.style.display = "block";
+
+  document.getElementById("adminEmail").textContent =
+    "Administrator: " + email;
+}
+
+logoutButton.addEventListener("click", async function() {
+  await client.auth.signOut();
+  window.location.replace("login.html");
+});
+
+checkAdmin();
+</script>
+
+</body>
+</html>
