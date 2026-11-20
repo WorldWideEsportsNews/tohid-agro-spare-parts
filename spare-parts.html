@@ -2,275 +2,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agricultural Spare Parts | TOHEEED AGRO</title>
-  <meta name="description" content="Agricultural machinery and tractor spare parts from TOHEEED AGRO. Contact us for prices and availability.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agricultural Spare Parts | TOHEEED AGRO</title>
+<meta name="description" content="Agricultural machinery and tractor spare parts from TOHEEED AGRO.">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7f4;
-      color: #222;
-    }
-
-    header {
-      background: #123d25;
-      color: white;
-      padding: 20px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    header h2 {
-      font-size: 24px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 18px;
-      font-weight: bold;
-    }
-
-    .hero {
-      background: linear-gradient(120deg, #123d25, #347d42);
-      color: white;
-      text-align: center;
-      padding: 75px 20px;
-    }
-
-    .hero h1 {
-      font-size: 40px;
-      margin-bottom: 15px;
-    }
-
-    .hero p {
-      font-size: 17px;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 50px 20px;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-
-    .section-title h2 {
-      color: #123d25;
-      font-size: 30px;
-      margin-bottom: 10px;
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-
-    .product {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      transition: 0.3s;
-    }
-
-    .product:hover {
-      transform: translateY(-5px);
-    }
-
-    .product img {
-      width: 100%;
-      height: 210px;
-      object-fit: cover;
-    }
-
-    .product-info {
-      padding: 22px;
-    }
-
-    .product-info h3 {
-      color: #123d25;
-      margin-bottom: 10px;
-      font-size: 20px;
-    }
-
-    .product-info p {
-      color: #666;
-      line-height: 1.5;
-      margin-bottom: 15px;
-    }
-
-    .product-info a {
-      display: inline-block;
-      background: #198754;
-      color: white;
-      padding: 11px 18px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .product-info a:hover {
-      background: #123d25;
-    }
-
-    .contact {
-      background: #e7eee8;
-      text-align: center;
-      padding: 45px 20px;
-      border-radius: 12px;
-      margin-top: 45px;
-    }
-
-    .contact h2 {
-      color: #123d25;
-      margin-bottom: 15px;
-    }
-
-    .contact a {
-      display: inline-block;
-      background: #198754;
-      color: white;
-      text-decoration: none;
-      padding: 13px 25px;
-      border-radius: 6px;
-      margin-top: 20px;
-      font-weight: bold;
-    }
-
-    footer {
-      background: #123d25;
-      color: white;
-      text-align: center;
-      padding: 22px;
-      margin-top: 40px;
-    }
-
-    @media (max-width: 600px) {
-      header {
-        justify-content: center;
-        text-align: center;
-      }
-
-      nav a {
-        display: inline-block;
-        margin: 7px;
-      }
-
-      .hero h1 {
-        font-size: 30px;
-      }
-    }
-  </style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f5f7f4;color:#222}
+header{background:#123d25;color:white;padding:20px 7%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+header h2{font-size:25px}
+nav a{color:white;text-decoration:none;margin-left:18px;font-weight:bold}
+nav a:hover{color:#a8e6b5}
+.hero{background:linear-gradient(120deg,#123d25,#347d42);color:white;text-align:center;padding:75px 20px}
+.hero h1{font-size:42px;margin-bottom:15px}
+.hero p{font-size:17px;line-height:1.7}
+.container{max-width:1200px;margin:auto;padding:50px 20px}
+.section-title{text-align:center;margin-bottom:30px}
+.section-title h2{color:#123d25;font-size:30px;margin-bottom:10px}
+.search-area{text-align:center;margin-bottom:25px}
+.search-area input{width:100%;max-width:550px;padding:15px;border:1px solid #ccc;border-radius:8px;font-size:16px}
+.filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:35px}
+.filters button{padding:11px 18px;border:1px solid #198754;border-radius:25px;background:white;color:#198754;font-weight:bold;cursor:pointer}
+.filters button.active,.filters button:hover{background:#198754;color:white}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
+.product{background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.08);transition:.3s}
+.product:hover{transform:translateY(-5px)}
+.product img{width:100%;height:210px;object-fit:cover}
+.product-info{padding:22px}
+.product-info h3{color:#123d25;margin-bottom:10px;font-size:20px}
+.product-info p{color:#666;line-height:1.5;margin-bottom:15px}
+.product-info a{display:inline-block;background:#198754;color:white;padding:11px 18px;border-radius:6px;text-decoration:none;font-weight:bold}
+.product-info a:hover{background:#123d25}
+.no-results{display:none;text-align:center;padding:30px;color:#777}
+.contact{background:#e7eee8;text-align:center;padding:45px 20px;border-radius:12px;margin-top:45px}
+.contact h2{color:#123d25;margin-bottom:15px}
+.contact a{display:inline-block;background:#198754;color:white;text-decoration:none;padding:13px 25px;border-radius:6px;margin-top:20px;font-weight:bold}
+footer{background:#123d25;color:white;text-align:center;padding:22px;margin-top:40px}
+@media(max-width:600px){
+header{justify-content:center;text-align:center}
+nav a{display:inline-block;margin:7px}
+.hero h1{font-size:30px}
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h2>TOHEEED AGRO</h2>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="spare-parts.html">Spare Parts</a>
-      <a href="customer-dashboard.html">My Account</a>
-    </nav>
-  </header>
+<header>
+<h2>TOHEEED AGRO</h2>
+<nav>
+<a href="index.html">Home</a>
+<a href="spare-parts.html">Spare Parts</a>
+<a href="customer-dashboard.html">My Account</a>
+</nav>
+</header>
 
-  <section class="hero">
-    <h1>Agricultural Spare Parts</h1>
-    <p>Quality spare parts for tractors and agricultural machinery.</p>
-    <p>Contact us for product details, prices and availability.</p>
-  </section>
+<section class="hero">
+<h1>Agricultural Spare Parts</h1>
+<p>Quality spare parts for tractors and agricultural machinery.</p>
+<p>Contact us for product details, prices and availability.</p>
+</section>
 
-  <main class="container">
-    <div class="section-title">
-      <h2>Our Spare Parts Categories</h2>
-      <p>Explore our agricultural machinery spare parts.</p>
-    </div>
+<main class="container">
 
-    <div class="products">
+<div class="section-title">
+<h2>Our Spare Parts Categories</h2>
+<p>Search and explore our agricultural machinery spare parts.</p>
+</div>
 
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=800&q=80" alt="Tractor machinery">
-        <div class="product-info">
-          <h3>Tractor Spare Parts</h3>
-          <p>Parts for tractor maintenance and repair.</p>
-          <a href="https://wa.me/923334246467?text=I%20am%20interested%20in%20tractor%20spare%20parts">Enquire Now</a>
-        </div>
-      </div>
+<div class="search-area">
+<input type="text" id="productSearch" placeholder="Search spare parts...">
+</div>
 
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80" alt="Mechanical components">
-        <div class="product-info">
-          <h3>Engine Components</h3>
-          <p>Engine-related components for agricultural machinery.</p>
-          <a href="https://wa.me/923334246467?text=I%20am%20interested%20in%20engine%20components">Enquire Now</a>
-        </div>
-      </div>
+<div class="filters">
+<button class="active" data-category="all">All Parts</button>
+<button data-category="tractor">Tractor Parts</button>
+<button data-category="engine">Engine Parts</button>
+<button data-category="hydraulic">Hydraulic Parts</button>
+<button data-category="bearings">Bearings & Seals</button>
+<button data-category="filters">Filters & Belts</button>
+</div>
 
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=800&q=80" alt="Hydraulic equipment">
-        <div class="product-info">
-          <h3>Hydraulic Parts</h3>
-          <p>Hydraulic components for agricultural equipment.</p>
-          <a href="https://wa.me/923334246467?text=I%20am%20interested%20in%20hydraulic%20parts">Enquire Now</a>
-        </div>
-      </div>
+<div class="products" id="products">
 
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80" alt="Industrial machinery">
-        <div class="product-info">
-          <h3>Bearings & Seals</h3>
-          <p>Bearings, seals and related mechanical components.</p>
-          <a href="https://wa.me/923334246467?text=I%20am%20interested%20in%20bearings%20and%20seals">Enquire Now</a>
-        </div>
-      </div>
+<div class="product" data-category="tractor">
+<img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=800&q=80" alt="Tractor machinery">
+<div class="product-info">
+<h3>Tractor Spare Parts</h3>
+<p>Parts for tractor maintenance and repair.</p>
+<a href="https://wa.me/923334246467?text=I%20am%20interested%20in%20tractor%20spare%20parts">Enquire Now</a>
+</div>
+</div>
 
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Machine components">
-        <div class="product-info">
-          <h3>Filters & Belts</h3>
-          <p>Filters and belts for agricultural machinery servicing.</p>
-          <a href="https://wa.me/923334246467?text=I%20am%20interested%20in%20filters%20and%20belts">Enquire Now</a>
-        </div>
-      </div>
+<div class="product" data-category="engine">
+<img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80" alt="Mechanical components">
+<div class="product-info">
+<h3>Engine Components</h3>
+<p>Engine-related components for agricultural machinery.</p>
+<a href="https://wa.me/923334246467?text=I%20am%20interested%20in%20engine%20components">Enquire Now</a>
+</div>
+</div>
 
-      <div class="product">
-        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" alt="Agricultural field">
-        <div class="product-info">
-          <h3>Other Agricultural Parts</h3>
-          <p>Ask us about other agricultural machinery components.</p>
-          <a href="https://wa.me/923334246467?text=I%20need%20other%20agricultural%20spare%20parts">Enquire Now</a>
-        </div>
-      </div>
+<div class="product" data-category="hydraulic">
+<img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=800&q=80" alt="Hydraulic equipment">
+<div class="product-info">
+<h3>Hydraulic Parts</h3>
+<p>Hydraulic components for agricultural equipment.</p>
+<a href="https://wa.me/923334246467?text=I%20am%20interested%20in%20hydraulic%20parts">Enquire Now</a>
+</div>
+</div>
 
-    </div>
+<div class="product" data-category="bearings">
+<img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80" alt="Mechanical components">
+<div class="product-info">
+<h3>Bearings & Seals</h3>
+<p>Bearings, seals and related mechanical components.</p>
+<a href="https://wa.me/923334246467?text=I%20am%20interested%20in%20bearings%20and%20seals">Enquire Now</a>
+</div>
+</div>
 
-    <section class="contact">
-      <h2>Looking for a Specific Spare Part?</h2>
-      <p>Contact TOHEEED AGRO for prices and availability.</p>
-      <a href="https://wa.me/923334246467">Contact Us on WhatsApp</a>
-    </section>
-  </main>
+<div class="product" data-category="filters">
+<img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Machine components">
+<div class="product-info">
+<h3>Filters & Belts</h3>
+<p>Filters and belts for agricultural machinery servicing.</p>
+<a href="https://wa.me/923334246467?text=I%20am%20interested%20in%20filters%20and%20belts">Enquire Now</a>
+</div>
+</div>
 
-  <footer>
-    <p>© 2026 TOHEEED AGRO SPARE PARTS. All Rights Reserved.</p>
-  </footer>
+</div>
+
+<div class="no-results" id="noResults">
+<h3>No spare parts found.</h3>
+<p>Try another search term or category.</p>
+</div>
+
+<section class="contact">
+<h2>Looking for a Specific Spare Part?</h2>
+<p>Contact TOHEEED AGRO for prices and availability.</p>
+<a href="https://wa.me/923334246467">Contact Us on WhatsApp</a>
+</section>
+
+</main>
+
+<footer>
+<p>© 2026 TOHEEED AGRO SPARE PARTS. All Rights Reserved.</p>
+</footer>
+
+<script>
+const searchInput=document.getElementById("productSearch");
+const products=document.querySelectorAll(".product");
+const filterButtons=document.querySelectorAll(".filters button");
+const noResults=document.getElementById("noResults");
+
+let activeCategory="all";
+
+function filterProducts(){
+const searchText=searchInput.value.toLowerCase().trim();
+let visibleCount=0;
+
+products.forEach(product=>{
+const category=product.dataset.category;
+const text=product.innerText.toLowerCase();
+const matchesSearch=text.includes(searchText);
+const matchesCategory=activeCategory==="all"||category===activeCategory;
+
+if(matchesSearch&&matchesCategory){
+product.style.display="block";
+visibleCount++;
+}else{
+product.style.display="none";
+}
+});
+
+noResults.style.display=visibleCount===0?"block":"none";
+}
+
+searchInput.addEventListener("input",filterProducts);
+
+filterButtons.forEach(button=>{
+button.addEventListener("click",()=>{
+filterButtons.forEach(btn=>btn.classList.remove("active"));
+button.classList.add("active");
+activeCategory=button.dataset.category;
+filterProducts();
+});
+});
+</script>
 
 </body>
 </html>
